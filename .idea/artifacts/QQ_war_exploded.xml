@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="QQ:war exploded">
+    <output-path>$PROJECT_DIR$/target/QQ</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="QQ" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:5.1.39" />
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: javax.websocket:javax.websocket-api:1.1" />
+          <element id="library" level="project" name="Maven: com.google.code.gson:gson:2.7" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/QQ/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="QQ/web/Web" />
+    </root>
+  </artifact>
+</component>
