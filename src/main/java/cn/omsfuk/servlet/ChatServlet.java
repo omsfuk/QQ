@@ -1,6 +1,7 @@
 package cn.omsfuk.servlet;
 
 import cn.omsfuk.domain.Message;
+import cn.omsfuk.util.XssUtil;
 import com.google.gson.Gson;
 
 import javax.websocket.OnClose;
@@ -27,23 +28,24 @@ public class ChatServlet {
     private static HashMap<String, Session> clients = new HashMap<String, Session>();
 
     @OnMessage
-    public void onMessage(String message, Session session) throws IOException, InterruptedException {
-        Gson gson = new Gson();
-        Message msg = gson.fromJson(message, Message.class);
-        if(msg.from.length() <= 20 && !clients.containsKey(msg.from)) {
-            System.out.println("添加到列表" + msg.from);
-            clients.put(msg.from, session);
-        } else {
-            if(clients.containsKey(msg.to)) {
-                System.out.println("发送成功");
-                clients.get(msg.to).getBasicRemote().sendText(message);
+    public void onMessage(String message, Session session) {
+        try {
+            message = XssUtil.filter(message);
+            Gson gson = new Gson();
+            Message msg = gson.fromJson(message, Message.class);
+            if (msg.from.length() <= 20 && !clients.containsKey(msg.from)) {
+                clients.put(msg.from, session);
             } else {
-                System.out.println("未上线");
-                session.getBasicRemote().sendText(gson.toJson(new Message(msg.to, msg.from, "对方已下线")));
+                if (clients.containsKey(msg.to)) {
+                    clients.get(msg.to).getBasicRemote().sendText(message);
+                } else {
+                    session.getBasicRemote().sendText(gson.toJson(new Message(msg.to, msg.from, "对方已下线")));
+                }
             }
+        } catch(Exception e) {
+            e.printStackTrace();
         }
 
-        System.out.println("receive " + message);
     }
     /**
      * 当一个新用户连接时所调用的方法
@@ -52,15 +54,11 @@ public class ChatServlet {
      */
     @OnOpen
     public void onOpen(Session session) {
-        System.out.println("客户端连接成功");
 
     }
     /** 当一个用户断开连接时所调用的方法*/
     @OnClose
     public void onClose(Session session) {
-        if(session == null) {
-            System.out.println("失败了");
-        }
         Set<String> users = clients.keySet();
         Iterator<String> it = users.iterator();
         while(it.hasNext()) {
@@ -70,6 +68,5 @@ public class ChatServlet {
                 break;
             }
         }
-        System.out.println("客户端断开连接");
     }
 }

@@ -56,8 +56,6 @@ public class RegisterServlet extends HttpServlet{
 
             if(password == null || gender == null || age == Integer.MIN_VALUE || verifyCode == null) {
 
-                System.out.println("wwwwwwwwwwwwwww");
-
                 RequestDispatcher view = req.getRequestDispatcher("WEB-INF/jsp/register.jsp");
                 view.forward(req, resp);
                 return ;
@@ -80,10 +78,8 @@ public class RegisterServlet extends HttpServlet{
         String realPath = req.getServletContext().getRealPath("/");
         File file = new File(realPath + "/users/" + username + "/");
 
-        if(file.mkdirs()) {
-            System.out.println("创建成功");
-        } else {
-            System.out.println("创建失败");
+        if(!file.mkdirs()) {
+            System.out.println(username + "创建用户文件夹失败");
         }
 
         writer.write("success");

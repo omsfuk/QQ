@@ -19,7 +19,6 @@ public class FriendDao {
         Connection conn = null;
         PreparedStatement pstmt = null;
         try {
-
             conn = DbUtil.getConn();
             conn.setAutoCommit(false);
             String sql = "insert into friends(uuid, state, user1, user2) values(uuid(), 0, (select uuid from users where username = ?), (select uuid from users where username = ?))";

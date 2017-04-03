@@ -25,8 +25,6 @@ public class VerifyCodeServlet extends HttpServlet {
         resp.setDateHeader("Expires", 0);
         resp.setContentType("image/jpeg");
 
-        System.out.println("更改验证码");
-
         //生成随机字串
         String verifyCode = VerifyCodeUtils.generateVerifyCode(4);
         //存入会话session

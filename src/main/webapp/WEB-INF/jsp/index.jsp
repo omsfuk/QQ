@@ -109,7 +109,7 @@
                 '</div>');
         }
 
-        var webSocket = new WebSocket('ws://localhost:8080/websocket');
+        var webSocket = new WebSocket('ws://qq.knife037.cn/websocket');
 
         webSocket.onerror = function(event) {
             $("#info").html("连接异常");
@@ -117,12 +117,12 @@
         //与WebSocket建立连接
         webSocket.onopen = function(event) {
             $("#info").html("连接成功");
-            var from = $("#username").val()
+            var from = $("#username").val();;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
             var msg = {
                 from: from,
                 to: "SERVER",
                 cont: "none"
-            }
+            };;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
             webSocket.send(JSON.stringify(msg));
         };
@@ -149,14 +149,15 @@
             var btn = $(this);
             var s = $("#" + btn.attr("data-friend") + " input");
             var to = btn.attr("data-friend");
-            var from = $("#username").val()
+            var from = $("#username").val();;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            var cont = s.val().replace(/</ig, "&lt;").replace(/>/ig, "&gt;");
             var msg = {
                 from: from,
                 to: to,
-                cont: s.val()
-            }
+                cont: cont
+            };;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-            $("#" + to + " textarea").html($("#" + to + " textarea").html() + "我 :\r\n    " + s.val() + "\r\n");
+            $("#" + to + " textarea").html($("#" + to + " textarea").html() + "我 :\r\n    " + cont + "\r\n");
 
             webSocket.send(JSON.stringify(msg));
             s.val("");
@@ -205,7 +206,7 @@
                     });
                 } else {
                     alert("好友ID不能为空")
-                };
+                }
             })
 
         });

@@ -46,7 +46,7 @@
             <label for="inputVerifyCode">验证码</label>
             <input name="verifyCode" type="text" class="form-control" id="inputVerifyCode" placeholder="请输入验证码">
             <div style="margin-top:5px">
-                <img id="imgVerCode" src="http://localhost:8080/verifyCode" />
+                <img id="imgVerCode" src="http://qq.knife037.cn/verifyCode" />
             </div>
         </div>
         <button id="register" class="btn btn-default">注册</button>
@@ -57,7 +57,7 @@
 <script>
     $(document).ready(function() {
         $("#imgVerCode").click(function() {
-            $(this).attr("src", "http://localhost:8080/verifyCode?date=" + new Date());
+            $(this).attr("src", "http://qq.knife037.cn/verifyCode?date=" + new Date());
         });
 
         $("#inputUsername").blur(function() {
@@ -66,11 +66,11 @@
                 if(data == "success") {
                     $("#lblUsername").html("用户名（可用）")
                 } else {
-                    $("#lblUsername").html("用户名（不可用）")
+                    $("#lblUsername").html("用户名（不可用）");;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                     alert(data);
                 }
             });
-        })
+        });;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
         $("#register").click(function() {
             var username = $("#inputUsername").val();
@@ -80,8 +80,8 @@
             var verCode = $("#inputVerifyCode").val();
 
             if(password != $("#inputPassword2").val()) {
-                $("#inputPassword1").val("")
-                $("#inputPassword2").val("")
+                $("#inputPassword1").val("");;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+                $("#inputPassword2").val("");;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
                 alert("两次密码不一致");
                 return ;
             }
